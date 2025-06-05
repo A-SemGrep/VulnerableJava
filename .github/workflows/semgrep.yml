@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - master
+    - main
     paths:
     - .github/workflows/semgrep.yml
 name: Semgrep
@@ -23,7 +24,7 @@ jobs:
       - name: Create Zip File
         run: find . -type f -name 'maven_dep_tree.txt' -exec zip -r archive.zip {} +
       - name: Upload Dependency Zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.4
         with:
           name: zipfile
           path: archive.zip
