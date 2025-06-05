@@ -11,7 +11,22 @@ on:
   # random HH:MM to avoid a load spike on GitHub Actions at 00:00
   - cron: 5 12 * * *
 name: Semgrep
+
 jobs:
+  maven-deps:
+    name: Generate Maven Dependency Tree
+    runs-on: ubuntu-latest
+    needs: semgrep
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Java and Maven
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'  # Adjust version as needed
+    - name: Run mvn dependency:tree
+      run: mvn dependency:tree -DoutputFile=maven_dep_tree.txt
+      
   semgrep:
     name: semgrep/ci
     runs-on: ubuntu-latest
