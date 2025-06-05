@@ -1,3 +1,4 @@
+# Force metadata refresh
 name: Semgrep + Maven Dependency Tree
 
 on:
